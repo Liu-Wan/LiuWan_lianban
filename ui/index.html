@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>LianBan Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="css/css2">
+</head>
+
+<body>
+    <div id="app" style="display: none;">
+        <div class="panel">
+            <div class="sidebar">
+                <div class="logo">
+                    <i class="fas fa-shield-alt"></i> 联盟封禁
+                </div>
+                <div class="nav-item active" onclick="switchTab('search')"><i class="fas fa-search"></i> 查询封禁</div>
+                <div class="nav-item" onclick="switchTab('my_bans')"><i class="fas fa-list"></i> 我的提交</div>
+                <div class="nav-item" onclick="switchTab('submit')"><i class="fas fa-gavel"></i> 提交封禁</div>
+                <div class="nav-item logout" onclick="closeUI()"><i class="fas fa-sign-out-alt"></i> 关闭面板</div>
+            </div>
+
+            <div class="content">
+                <div id="tab-search" class="tab-content active">
+                    <h2>查询封禁库</h2>
+                    <div class="form-group">
+                        <input type="text" id="search-input" placeholder="输入标识符 (Steam, License)...">
+                        <button id="btn-search" onclick="doSearch()">
+                            <div class="spinner"></div><span>查询</span>
+                        </button>
+                    </div>
+                    <div id="search-result" class="result-box"></div>
+                </div>
+
+                <div id="tab-my_bans" class="tab-content">
+                    <h2>我的提交记录</h2>
+                    <div class="toolbar" style="margin-bottom: 1rem;">
+                        <button onclick="loadMyBans()" class="btn-refresh"><i class="fas fa-sync"></i> 刷新</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>标识符</th>
+                                    <th>原因</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="my-bans-list">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="tab-submit" class="tab-content">
+                    <h2>提交新封禁</h2>
+                    <div class="form-vertical">
+                        <div class="form-group-v">
+                            <label>标识符 (Identifier)</label>
+                            <input type="text" id="submit-identifier" placeholder="license:xxxxxxxx...">
+                        </div>
+                        <div class="form-group-v">
+                            <label>封禁原因 (Reason)</label>
+                            <input type="text" id="submit-reason" placeholder="例如: 使用外挂">
+                        </div>
+                        <div class="form-group-v">
+                            <label>证据图片链接 (Evidence URL)</label>
+                            <input type="text" id="submit-evidence" placeholder="http://...">
+                        </div>
+                        <button id="btn-submit-action" class="btn-submit" onclick="doSubmit()">
+                            <div class="spinner"></div><span>提交封禁</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="unban-modal" class="modal-overlay">
+        <div class="modal">
+            <h3 class="modal-title">申请解除封禁</h3>
+            <p class="modal-subtitle">
+                标识符: <span id="unban-identifier" style="color: #60a5fa;"></span>
+            </p>
+            <div class="form-group-modal">
+                <label>解除理由 <span style="color: #ef4444;">*</span></label>
+                <textarea id="unban-reason" rows="4" placeholder="请详细说明解除理由，如误封、证据不足等..."></textarea>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeUnbanModal()">取消</button>
+                <button class="btn-confirm" id="submit-unban-btn" onclick="submitUnbanRequest()">提交申请</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>
