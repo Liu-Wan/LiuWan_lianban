@@ -2,9 +2,9 @@
 
 <div align="center">
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![FiveM](https://img.shields.io/badge/FiveM-Compatible-green.svg)](https://fivem.net/)
-[![Version](https://img.shields.io/badge/version-2.0.0-orange.svg)](https://github.com/yourusername/lianban_client)
+[![License](https://img.shields.io/badge/license-Apache2.0-blue.svg)](LICENSE.txt)
+[![FiveM](https://img.shields.io/badge/FiveM-Compatible-green.svg)](https://www.fivemzh.cn/)
+[![Version](https://img.shields.io/badge/version-2.0.0-orange.svg)](https://github.com/Liu-Wan/LiuWan_lianban)
 
 **跨服务器联盟封禁系统，实时同步全网作弊玩家数据**
 
@@ -78,17 +78,17 @@ FiveM联盟封禁系统客户端插件是一个强大的跨服务器反外挂解
 
 1. **下载插件**
 
-```bash
-git clone https://github.com/yourusername/lianban_client.git
+```
+https://github.com/Liu-Wan/LiuWan_lianban/releases/download/2.0.0/LiuWan_lianban.zip
 ```
 
 2. **放置到resources目录**
 
-将 `lianban_client` 文件夹放入服务器的 `resources` 目录：
+将 `LiuWan_lianban` 文件夹放入服务器的 `resources` 目录：
 
 ```
 resources/
-└── lianban_client/
+└── LiuWan_lianban/
     ├── config.lua
     ├── server_config.lua
     ├── fxmanifest.lua
@@ -106,13 +106,13 @@ resources/
 在 `server.cfg` 中添加启动项：
 
 ```cfg
-ensure lianban_client
+ensure LiuWan_lianban
 ```
 
 4. **重启服务器**
 
 ```bash
-restart lianban_client
+restart LiuWan_lianban
 # 或者重启整个服务器
 ```
 
@@ -125,16 +125,15 @@ restart lianban_client
 ```lua
 Config = {}
 
--- 联盟封禁平台API地址（无需带 /api）
-Config.ApiUrl = "https://lianban.fivemzh.cn"
+-- 封禁检查配置
+Config.CheckBanOnJoin = true -- 玩家进服时是否检查封禁
 
--- 是否在玩家进服时检查封禁
-Config.CheckBanOnJoin = true
-
--- 框架类型: "standalone", "esx", "qbcore"
+-- 框架设置: "standalone", "esx", "qbcore"
 Config.Framework = "esx"
 
--- 管理员权限组
+-- 管理员权限配置 (用于游戏内命令 /lbpanel 和 面板访问)
+-- ESX/QBCore: 填写用户组名称 (如 "superadmin", "admin")
+-- Standalone: 填写 ace 权限组名称 (如 "superadmin", "admin", 对应 group.superadmin)
 Config.AdminGroups = {
     "superadmin",
     "admin"
@@ -146,8 +145,9 @@ Config.AdminGroups = {
 ```lua
 ServerConfig = {}
 
--- 您的API密钥（在联盟封禁平台获取）
-ServerConfig.ApiKey = "your_64_character_api_key_here"
+-- 您的服务器API密钥 (仅服务器端可见，防止泄露)
+-- 请在联盟封禁平台 (https://lianban.fivemzh.cn) 注册账号后获取API密钥
+ServerConfig.ApiKey = "你的API密钥"
 ```
 
 > ⚠️ **安全提示**：
@@ -159,7 +159,6 @@ ServerConfig.ApiKey = "your_64_character_api_key_here"
 
 | 参数 | 类型 | 说明 | 默认值 |
 |------|------|------|--------|
-| `ApiUrl` | string | 联盟封禁平台地址 | - |
 | `ApiKey` | string | 服务器API密钥 | - |
 | `CheckBanOnJoin` | boolean | 进服检测开关 | `true` |
 | `Framework` | string | 框架类型 | `"esx"` |
@@ -275,7 +274,7 @@ ServerConfig.ApiKey = "your_64_character_api_key_here"
 
 **解决方法**：
 - 检查 `fxmanifest.lua` 是否存在
-- 确认 `server.cfg` 中已添加 `ensure lianban_client`
+- 确认 `server.cfg` 中已添加 `ensure LiuWan_lianban`
 - 查看服务器控制台错误信息
 
 #### 2. 无法连接到API
@@ -283,7 +282,6 @@ ServerConfig.ApiKey = "your_64_character_api_key_here"
 **症状**：提示"Request Timeout or Connection Failure"
 
 **解决方法**：
-- 检查 `Config.ApiUrl` 是否正确
 - 确认服务器可以访问外网
 - 验证API密钥是否正确填写在 `server_config.lua`
 
@@ -303,7 +301,7 @@ ServerConfig.ApiKey = "your_64_character_api_key_here"
 
 **解决方法**：
 - 确认 `Config.CheckBanOnJoin = true`
-- 重启插件：`restart lianban_client`
+- 重启插件：`restart LiuWan_lianban`
 - 查看控制台是否有API错误
 
 #### 5. UI界面显示异常
@@ -337,15 +335,7 @@ print(string.format("^2[DEBUG] API Response: %s^0", json.encode(decoded)))
 
 ## 🤝 贡献指南
 
-欢迎提交Issue和Pull Request！
-
-### 开发环境搭建
-
-1. Fork本仓库
-2. 创建新分支：`git checkout -b feature/your-feature`
-3. 提交更改：`git commit -am 'Add some feature'`
-4. 推送分支：`git push origin feature/your-feature`
-5. 提交Pull Request
+欢迎提交Issue！
 
 ### 代码规范
 
@@ -386,7 +376,7 @@ print(string.format("^2[DEBUG] API Response: %s^0", json.encode(decoded)))
 
 ## 📄 许可证
 
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
+本项目采用 Apache-2.0 许可证 - 查看 [LICENSE](LICENSE.txt) 文件了解详情
 
 ---
 
@@ -394,8 +384,8 @@ print(string.format("^2[DEBUG] API Response: %s^0", json.encode(decoded)))
 
 - **联盟封禁平台**：https://lianban.fivemzh.cn
 - **API文档**：https://lianban.fivemzh.cn/docs
-- **问题反馈**：[GitHub Issues](https://github.com/yourusername/lianban_client/issues)
-- **FiveM论坛**：[讨论帖](https://forum.cfx.re/)
+- **问题反馈**：[GitHub Issues](https://github.com/Liu-Wan/LiuWan_lianban/issues)
+- **FiveM论坛**：[讨论帖](https://www.fivemzh.cn/)
 
 ---
 
@@ -411,9 +401,8 @@ print(string.format("^2[DEBUG] API Response: %s^0", json.encode(decoded)))
 
 如有问题或建议，请通过以下方式联系：
 
-- **GitHub Issues**：[提交问题](https://github.com/yourusername/lianban_client/issues)
-- **邮箱**：support@fivemzh.cn
-- **QQ群**：123456789（FiveM中文社区）
+- **GitHub Issues**：[提交问题](https://github.com/Liu-Wan/LiuWan_lianban/issues)
+- **QQ群**：475055833（FiveM中文社区）
 
 ---
 
