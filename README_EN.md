@@ -2,9 +2,9 @@
 
 <div align="center">
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![FiveM](https://img.shields.io/badge/FiveM-Compatible-green.svg)](https://fivem.net/)
-[![Version](https://img.shields.io/badge/version-2.0.0-orange.svg)](https://github.com/yourusername/lianban_client)
+[![License](https://img.shields.io/badge/license-Apache2.0-blue.svg)](LICENSE.txt)
+[![FiveM](https://img.shields.io/badge/FiveM-Compatible-green.svg)](https://www.fivemzh.cn/)
+[![Version](https://img.shields.io/badge/version-2.0.0-orange.svg)](https://github.com/Liu-Wan/LiuWan_lianban)
 
 **Cross-server Alliance Ban System - Real-time Synchronization of Cheater Database**
 
@@ -73,17 +73,17 @@ This plugin connects to the Alliance Ban Platform via API to achieve:
 
 1. **Download Plugin**
 
-```bash
-git clone https://github.com/yourusername/lianban_client.git
+```
+https://github.com/Liu-Wan/LiuWan_lianban/releases/download/2.0.0/LiuWan_lianban.zip
 ```
 
 2. **Place in Resources Directory**
 
-Put the `lianban_client` folder in your server's `resources` directory:
+Put the `LiuWan_lianban` folder in your server's `resources` directory:
 
 ```
 resources/
-└── lianban_client/
+└── LiuWan_lianban/
     ├── config.lua
     ├── server_config.lua
     ├── fxmanifest.lua
@@ -101,13 +101,13 @@ resources/
 Add startup item in `server.cfg`:
 
 ```cfg
-ensure lianban_client
+ensure LiuWan_lianban
 ```
 
 4. **Restart Server**
 
 ```bash
-restart lianban_client
+restart LiuWan_lianban
 # Or restart the entire server
 ```
 
@@ -119,9 +119,6 @@ restart lianban_client
 
 ```lua
 Config = {}
-
--- Alliance Ban Platform API URL (without /api)
-Config.ApiUrl = "https://lianban.fivemzh.cn"
 
 -- Check ban when player joins
 Config.CheckBanOnJoin = true
@@ -142,6 +139,7 @@ Config.AdminGroups = {
 ServerConfig = {}
 
 -- Your API key (obtained from Alliance Ban Platform)
+-- Please register an account on the Alliance banning platform (https://lianban.fivemzh.cn) to obtain the API key.
 ServerConfig.ApiKey = "your_64_character_api_key_here"
 ```
 
@@ -236,7 +234,7 @@ For detailed API documentation, please visit [API Docs](https://lianban.fivemzh.
 
 **Solutions**:
 - Check if `fxmanifest.lua` exists
-- Confirm `ensure lianban_client` is added in `server.cfg`
+- Confirm `ensure LiuWan_lianban` is added in `server.cfg`
 - Check server console for error messages
 
 #### 2. Cannot Connect to API
@@ -273,14 +271,6 @@ For detailed API documentation, please visit [API Docs](https://lianban.fivemzh.
 
 Issues and Pull Requests are welcome!
 
-### Development Environment Setup
-
-1. Fork this repository
-2. Create new branch: `git checkout -b feature/your-feature`
-3. Commit changes: `git commit -am 'Add some feature'`
-4. Push branch: `git push origin feature/your-feature`
-5. Submit Pull Request
-
 ---
 
 ## 📝 Changelog
@@ -314,7 +304,7 @@ Issues and Pull Requests are welcome!
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the Apache-2.0 License - see the [LICENSE](LICENSE.txt) file for details
 
 ---
 
@@ -322,8 +312,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Alliance Ban Platform**: https://lianban.fivemzh.cn
 - **API Documentation**: https://lianban.fivemzh.cn/docs
-- **Issue Tracker**: [GitHub Issues](https://github.com/yourusername/lianban_client/issues)
-- **FiveM Forum**: [Discussion Thread](https://forum.cfx.re/)
+- **Issue Tracker**: [GitHub Issues](https://github.com/Liu-Wan/LiuWan_lianban/issues)
+- **FiveM Forum**: [Discussion Thread](https://www.fivemzh.cn/)
 
 ---
 
@@ -339,8 +329,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For questions or suggestions, please contact via:
 
-- **GitHub Issues**: [Submit Issue](https://github.com/yourusername/lianban_client/issues)
-- **Email**: support@fivemzh.cn
+- **GitHub Issues**: [Submit Issue](https://github.com/Liu-Wan/LiuWan_lianban/issues)
 
 ---
 
